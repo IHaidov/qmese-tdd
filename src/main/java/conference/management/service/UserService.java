@@ -51,8 +51,8 @@ public class UserService {
 
     @Transactional
     public User updateUser(String email, String newEmail) {
-        //TODO: provide implementation for updating user
-        return null;
+        userRepository.findByEmail(email).ifPresent(user -> user.setEmail(newEmail));
+        return userRepository.findByEmail(newEmail).map(userMapper::toUser).get();
     }
 
     @Transactional
